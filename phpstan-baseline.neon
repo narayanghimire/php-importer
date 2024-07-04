@@ -1,0 +1,76 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Class App\\\\Collection\\\\TypedCollection extends generic class Illuminate\\\\Support\\\\Collection but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: src/Collection/TypedCollection.php
+
+		-
+			message: "#^Method App\\\\Collection\\\\TypedCollection\\:\\:assertValidType\\(\\) has parameter \\$item with no type specified\\.$#"
+			count: 1
+			path: src/Collection/TypedCollection.php
+
+		-
+			message: "#^Method App\\\\Database\\\\AbstractDatabase\\:\\:__construct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Database/AbstractDatabase.php
+
+		-
+			message: "#^Method App\\\\Factory\\\\DataReaderFactory\\:\\:create\\(\\) should return App\\\\Reader\\\\DataReaderInterface but returns mixed\\.$#"
+			count: 1
+			path: src/Factory/DataReaderFactory.php
+
+		-
+			message: "#^Parameter \\#2 \\$username of class App\\\\Database\\\\MysqlDatabase constructor expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Factory/DatabaseFactory.php
+
+		-
+			message: "#^Parameter \\#3 \\$password of class App\\\\Database\\\\MysqlDatabase constructor expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Factory/DatabaseFactory.php
+
+		-
+			message: "#^Method App\\\\Logger\\\\Logger\\:\\:log\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Logger/Logger.php
+
+		-
+			message: "#^Part \\$level \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Logger/Logger.php
+
+		-
+			message: "#^Cannot access offset 'facility' on array\\|DateTimeImmutable\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Logger/Processor/FacilityProcessor.php
+
+		-
+			message: "#^Parameter \\#1 \\$facility of static method App\\\\Logger\\\\Processor\\\\FacilityProcessor\\:\\:isValidFacility\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Logger/Processor/FacilityProcessor.php
+
+		-
+			message: "#^Part \\$facility \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Logger/Processor/FacilityProcessor.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/config/ContainerConfig.php
+
+		-
+			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
+			count: 1
+			path: src/config/ContainerConfig.php
+
+		-
+			message: "#^Parameter \\#1 \\$sourceType of static method App\\\\Factory\\\\DataReaderFactory\\:\\:create\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/config/ContainerConfig.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function strtolower expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/validator/XmlItemValidator.php

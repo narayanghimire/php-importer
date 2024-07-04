@@ -1,0 +1,7 @@
+Things to improve:
+
+1. Use model class in collection
+2. Use factory pattern  for different data source
+3. Incase of PDO use transcation for rollback if there is any errors
+4. use entity_id to check wheather to update or insert
+5. When running console command show how many was inserted & how many was updated

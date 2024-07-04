@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  php-importer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php-importer:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=mydatabase
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./db/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
