@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Logger\Processor;
 
+use App\Logger\Logger;
 use InvalidArgumentException;
 use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
@@ -11,7 +12,7 @@ use ReflectionClass;
 
 class FacilityProcessor implements ProcessorInterface
 {
-    private static string $defaultFacility = 'Unknown';
+    private static string $defaultFacility = Logger::FACILITY_UNKNOWN;
 
     public function __invoke(LogRecord $record): LogRecord
     {
