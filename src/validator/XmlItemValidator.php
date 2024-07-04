@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\validator;
 
-use App\Database\DatabaseInterface;
-use App\Logger\Logger;
 use App\Model\Item;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;

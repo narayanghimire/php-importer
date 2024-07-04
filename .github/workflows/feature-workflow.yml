@@ -34,6 +34,9 @@ jobs:
       - name: Build and run Docker containers
         run: |
           docker-compose up --build -d
+      - name: Composer install
+        run: |
+          docker-compose run php-importer composer install 
 
       - name: Run Code check
         run: |
