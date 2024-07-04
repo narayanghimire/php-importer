@@ -18,6 +18,7 @@ use App\Repository\DataRepository;
 use App\Repository\DataRepositoryInterface;
 use App\Service\DataImportService;
 use Closure;
+use Dotenv\Dotenv;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Env;
@@ -57,11 +58,10 @@ class ContainerConfig
     public function init(): void
     {
         $this->checkEnvironment();
-
         $this->container
             ->when(ImportDataCommand::class)
             ->needs('$fileName')
-            ->give("feed.xml");
+            ->give(Env::get('XML_FILE_PATH'));
 
         $this->container->singleton(LoggerInterface::class, function () {
             $monolog = new MonologLogger('application');
@@ -102,6 +102,9 @@ class ContainerConfig
 
     protected function checkEnvironment(): void
     {
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv->load();
+
         $missing = [];
         foreach (static::REQUIRED_ENV_VARS as $key) {
             if (Env::get($key, null) === null) {

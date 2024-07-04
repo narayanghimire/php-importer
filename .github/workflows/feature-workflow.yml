@@ -1,0 +1,44 @@
+name: PullRequest-QA-Workflow
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+env:
+  BRANCH_NAME: ${{ github.head_ref }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker/compose:1.29.2
+        options: --privileged
+        env:
+          DOCKER_COMPOSE_VERSION: 1.29.2
+
+    steps:
+      - name: 'Basic info'
+        run: |
+          echo "Executing pull request workflow for branch $BRANCH_NAME, on: ${{ github.repository }}"
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate .env file from .env.example
+        run: |
+          cp .env.example .env
+
+      - name: Build and run Docker containers
+        run: |
+          docker-compose up --build -d
+
+      - name: Run Code check
+        run: |
+          docker-compose run php-importer composer codecheck
+
+      - name: Stop Docker containers
+        run: |
+          docker-compose down
