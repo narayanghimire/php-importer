@@ -37,9 +37,9 @@ class ContainerConfig
         'MYSQL_PASSWORD',
     ];
 
-    public function __construct()
+    public function __construct(Container $container)
     {
-        $this->container = new Container();
+        $this->container = $container;
     }
 
     /**
