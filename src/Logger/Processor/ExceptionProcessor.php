@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Logger\Processor;
 
 use Monolog\Processor\ProcessorInterface;
@@ -14,13 +16,13 @@ class ExceptionProcessor implements ProcessorInterface
             $exception = $record->context['exception'];
 
             $record->extra['exception'] = [
-                'level' => $record->level->getName(),
-                'type' => get_class($exception),
-                'message' => $exception->getMessage(),
-                'code' => $exception->getCode(),
-                'file' => $exception->getFile(),
-                'line' => $exception->getLine(),
-                'trace' => $exception->getTrace()
+                'level'    => $record->level->getName(),
+                'type'     => get_class($exception),
+                'message'  => $exception->getMessage(),
+                'code'     => $exception->getCode(),
+                'file'     => $exception->getFile(),
+                'line'     => $exception->getLine(),
+                'trace'    => $exception->getTrace()
             ];
         }
 

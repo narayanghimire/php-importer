@@ -1,0 +1,6 @@
+/bin/*
+!/bin/console.php
+.env
+/logs/*
+vendor
+.idea

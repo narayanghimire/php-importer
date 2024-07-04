@@ -35,7 +35,7 @@ class XMLDataReader implements DataReaderInterface
      */
     public function read(string $file): ItemCollection
     {
-        if (!$this->reader->open($file)) {
+        if (!$this->reader->open(__DIR__.'/../../resources/'.basename($file))) {
             $this->logger->log(
                 LogLevel::ERROR,
                 sprintf('Xml File %s not found', $file),
