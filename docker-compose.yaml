@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   php-importer:
     build:
@@ -20,9 +18,9 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
   mysql:
     image: mysql:latest
-    container_name: mysql-container
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
