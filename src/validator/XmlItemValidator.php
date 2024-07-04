@@ -29,7 +29,7 @@ class XmlItemValidator
                     LogLevel::ERROR,
                     sprintf('Missing required property on the model item: %s', $name)
                 );
-                throw new InvalidArgumentException(       sprintf('Missing required property on the model item: %s', $name),);
+                throw new InvalidArgumentException(sprintf('Missing required property on the model item: %s', $name),);
             }
 
         }

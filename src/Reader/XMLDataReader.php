@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Reader;
 
+use App\constants\Constants;
 use App\Logger\Logger;
 use App\Model\ItemCollection;
 use App\Transformer\XmlItemTransformer;
@@ -35,15 +36,20 @@ class XMLDataReader implements DataReaderInterface
      */
     public function read(string $file): ItemCollection
     {
-        if (!$this->reader->open(__DIR__.'/../../resources/'.basename($file))) {
+        $fileName = __DIR__.'/../../resources/'.basename($file);
+        $fileExists = file_exists($fileName);
+        if (!$fileExists) {
+            $fileName =__DIR__.'/../../resources/'.basename(Constants::DEFUALT_XML_FILE);
+        }
+        if (!$this->reader->open($fileName)) {
             $this->logger->log(
                 LogLevel::ERROR,
-                sprintf('Xml File %s not found', $file),
+                sprintf('unable to open Xml File %s ', $fileName),
                 [
                     'facility' => Logger::FACILITY_IMPORTER
                 ]
             );
-            throw new Exception(sprintf('Xml File %s not found', $file));
+            throw new Exception(sprintf('Xml File %s not found', $fileName));
         }
 
         $collection = new ItemCollection();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Reader\DataReaderInterface;
@@ -12,12 +14,9 @@ class DataReaderFactory
 {
     public static function create(string $sourceType): DataReaderInterface
     {
-        switch ($sourceType) {
-            case 'xml':
-                return Container::getInstance()->make(XMLDataReader::class);
-            // Add cases for other data source types (e.g., 'csv', 'amazon', 'json') as needed
-            default:
-                throw new InvalidArgumentException("Unsupported data source type: $sourceType");
-        }
+        return match ($sourceType) {
+            'xml' => Container::getInstance()->make(XMLDataReader::class),
+            default => throw new InvalidArgumentException("Unsupported data source type: $sourceType"),
+        };
     }
 }

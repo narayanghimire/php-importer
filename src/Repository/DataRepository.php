@@ -24,7 +24,7 @@ class DataRepository implements DataRepositoryInterface
     public function __construct(DatabaseInterface $database, LoggerInterface $logger)
     {
         $this->database = $database;
-        $this->logger = $logger;
+        $this->logger   = $logger;
     }
 
     public function save(ItemCollection $itemCollection, OutputInterface $output): void
@@ -37,7 +37,6 @@ class DataRepository implements DataRepositoryInterface
                 if ($item instanceof Item) {
                     try {
                         $this->upsertItem($pdo, $item, $output);
-                        $this->logItemSaved($item);
                     } catch (PDOException $exception) {
                         // Log the detailed exception
                         $this->logger->log(
@@ -56,7 +55,8 @@ class DataRepository implements DataRepositoryInterface
                 }
             }
             $pdo->commit();
-            $this->logSummary($output);
+            $output->writeln(sprintf('<info>Imported total %d items successfully.</info>', $this->insertCount));
+            $output->writeln(sprintf('<info>updated total %d items successfully.</info>', $this->updateCount));
         } catch (PDOException $e) {
             $pdo->rollBack();
             // Log the exception for the transaction failure
@@ -163,24 +163,5 @@ class DataRepository implements DataRepositoryInterface
             $this->updateCount++;
             $output->writeln(sprintf('updated %d items successfully.', $item->getEntityId()));
         }
-    }
-
-    private function logItemSaved(Item $item): void
-    {
-        $this->logger->log(
-            LogLevel::INFO,
-            "Saved item '{$item->getName()}' (Entity ID: {$item->getEntityId()}) successfully."
-        );
-    }
-
-    private function logSummary(OutputInterface $output): void
-    {
-        $total = $this->insertCount + $this->updateCount;
-        $this->logger->log(
-            LogLevel::INFO,
-            "Import summary: {$this->insertCount} items inserted, {$this->updateCount} items updated. Total: {$total} items processed."
-        );
-        $output->writeln(sprintf('<info>Imported total %d items successfully.</info>', $this->insertCount));
-        $output->writeln(sprintf('<info>updated total %d items successfully.</info>', $this->updateCount));
     }
 }
