@@ -44,7 +44,7 @@
         "test": "@php ./tools/phpunit --config=phpunit.xml tests",
         "unit-test": "@php ./tools/phpunit --config=phpunit.xml --testsuite \"Unit Tests\"",
         "integration-test": "@php ./tools/phpunit --config=phpunit.xml --testsuite \"Integration Tests\"",
-        "codecheck": "@php ./bin/phpstan analyse --level=9 --configuration=./phpstan.neon src",
+        "codecheck": "@php ./bin/phpstan analyse --level=9 --configuration=./phpstan.neon src"
     },
     "config": {
         "bin-dir": "bin",
