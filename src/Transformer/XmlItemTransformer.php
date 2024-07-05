@@ -18,7 +18,6 @@ readonly class XmlItemTransformer
     public function transform(SimpleXMLElement $element): Item
     {
         $this->validator->validate($element);
-
         return new Item(
             (int)$element->entity_id,
             (string)$element->CategoryName,
@@ -37,12 +36,13 @@ readonly class XmlItemTransformer
             $this->toBoolean((string)$element->Seasonal),
             $this->toBoolean((string)$element->Instock),
             (int)$element->Facebook,
-            strtolower((string)$element->Instock) === '1'
+            strtolower((string)$element->IsKCup) === '1'
         );
     }
 
     private function toBoolean(string $value): bool
     {
-        return strtolower($value) === 'yes';
+        $normalizedValue = strtolower(trim($value));
+        return in_array($normalizedValue, ['yes', 'true', '1', 'y'], true);
     }
 }

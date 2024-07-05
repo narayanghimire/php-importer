@@ -8,5 +8,5 @@ use App\Model\ItemCollection;
 
 interface DataReaderInterface
 {
-    public function read(string $file): ItemCollection;
+    public function read(string $filePath): ItemCollection;
 }

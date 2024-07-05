@@ -42,6 +42,12 @@ jobs:
         run: |
           docker-compose run php-importer composer codecheck
 
+      - name: Run Unit test
+        run: |
+          docker-compose run php-importer composer unit-test
+      - name: Run Integration test
+        run: |
+          docker-compose run php-importer composer integration-test
       - name: Stop Docker containers
         run: |
           docker-compose down

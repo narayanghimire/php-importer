@@ -8,4 +8,5 @@ use Symfony\Component\Console\Output\OutputInterface;
 interface DataRepositoryInterface
 {
     public function save(ItemCollection $itemCollection, OutputInterface $output): void;
+    public function delete(int $id): bool;
 }

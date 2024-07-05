@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Logger\Logger;
 use App\Reader\DataReaderInterface;
 use App\Repository\DataRepositoryInterface;
 use Exception;
-use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 use Symfony\Component\Console\Output\OutputInterface;
 
 readonly class DataImportService

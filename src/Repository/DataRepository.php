@@ -139,7 +139,7 @@ class DataRepository implements DataRepositoryInterface
         $stmt->bindValue(':sku', $item->getSku(), PDO::PARAM_STR);
         $stmt->bindValue(':name', $item->getName(), PDO::PARAM_STR);
         $stmt->bindValue(':description', $item->getDescription(), PDO::PARAM_STR);
-        $stmt->bindValue(':shortDesc', $item->getShortDesc(), PDO::PARAM_STR);
+        $stmt->bindValue(':shortDesc', $item->getShortdesc(), PDO::PARAM_STR);
         $stmt->bindValue(':price', $item->getPrice(), PDO::PARAM_STR);
         $stmt->bindValue(':link', $item->getLink(), PDO::PARAM_STR);
         $stmt->bindValue(':image', $item->getImage(), PDO::PARAM_STR);
@@ -162,6 +162,34 @@ class DataRepository implements DataRepositoryInterface
         } else {
             $this->updateCount++;
             $output->writeln(sprintf('updated %d items successfully.', $item->getEntityId()));
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function delete(int $entityId): bool
+    {
+        $pdo = $this->database->getPdo();
+
+        try {
+            $sql = "DELETE FROM items WHERE entityId = :entityId";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':entityId', $entityId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $exception) {
+            // Log the detailed exception
+            $this->logger->log(
+                LogLevel::ERROR,
+                "Error while deleting item from the database",
+                [
+                    'entityId' => $entityId,
+                    'exception' => $exception
+                ]
+            );
+            throw new Exception("Deletion failed: " . $exception->getMessage(), 0, $exception);
         }
     }
 }

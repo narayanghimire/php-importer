@@ -30,26 +30,14 @@ class XMLDataReader implements DataReaderInterface
      *  also depends on whether the XML file is
      *  very large and how important performance is
      *
-     * @param string $file
+     * @param string $filePath
      * /
      * @throws Exception
      */
-    public function read(string $file): ItemCollection
+    public function read(string $filePath): ItemCollection
     {
-        $fileName = __DIR__.'/../../resources/'.basename($file);
-        $fileExists = file_exists($fileName);
-        if (!$fileExists) {
-            $fileName =__DIR__.'/../../resources/'.basename(Constants::DEFUALT_XML_FILE);
-        }
-        if (!$this->reader->open($fileName)) {
-            $this->logger->log(
-                LogLevel::ERROR,
-                sprintf('unable to open Xml File %s ', $fileName),
-                [
-                    'facility' => Logger::FACILITY_IMPORTER
-                ]
-            );
-            throw new Exception(sprintf('Xml File %s not found', $fileName));
+        if (!$this->reader->open($filePath)) {
+            $this->handleXmlError($filePath, 'Unable to open XML file');
         }
 
         $collection = new ItemCollection();
@@ -65,5 +53,19 @@ class XMLDataReader implements DataReaderInterface
         $this->reader->close();
 
         return $collection;
+    }
+
+
+    /**
+     * Handles XML file opening errors.
+     *
+     * @param string $fileName The file name
+     * @param string $message The error message
+     * @throws Exception
+     */
+    private function handleXmlError(string $fileName, string $message): void
+    {
+        $this->logger->log(LogLevel::ERROR, $message, ['file' => $fileName]);
+        throw new Exception("XML file '{$fileName}' not found or could not be opened");
     }
 }
