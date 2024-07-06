@@ -18,6 +18,8 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - app-network
 
   mysql:
     image: mysql:latest
@@ -32,6 +34,10 @@ services:
       - mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
+    networks:
+      - app-network
 
 volumes:
   mysql-data:
+networks:
+  app-network:
