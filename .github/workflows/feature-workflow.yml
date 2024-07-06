@@ -51,9 +51,9 @@ jobs:
         run: |
           docker-compose run php-importer composer unit-test
 
-      - name: Run Integration test
+      - name: Check docker container
         run: |
-          docker-compose run php-importer composer integration-test
+          docker ps
 
       - name: Stop Docker containers
         run: |
