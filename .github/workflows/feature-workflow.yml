@@ -34,14 +34,9 @@ jobs:
       - name: Build and run Docker containers
         run: |
           docker-compose up --build -d
-
-      - name: Check MySQL logs
-        run: |
-          docker-compose logs mysql
-
       - name: Composer install
         run: |
-          docker-compose run php-importer composer install
+          docker-compose run php-importer composer install 
 
       - name: Run Code check
         run: |
@@ -50,11 +45,9 @@ jobs:
       - name: Run Unit test
         run: |
           docker-compose run php-importer composer unit-test
-
       - name: Run Integration test
         run: |
           docker-compose run php-importer composer integration-test
-
       - name: Stop Docker containers
         run: |
           docker-compose down
