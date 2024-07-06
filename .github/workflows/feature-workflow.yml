@@ -35,10 +35,6 @@ jobs:
         run: |
           docker-compose up --build -d
 
-      - name: Wait for MySQL to be ready
-        run: |
-          sleep 30  # Adjust the sleep time as needed
-
       - name: Composer install
         run: |
           docker-compose run php-importer composer install 
