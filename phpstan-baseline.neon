@@ -75,9 +75,5 @@ parameters:
 			count: 1
 			path: src/config/ContainerConfig.php
 
-		-
-			message: "#^Parameter \\#1 \\$string of function strtolower expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/validator/XmlItemValidator.php
 
 

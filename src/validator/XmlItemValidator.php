@@ -19,24 +19,40 @@ class XmlItemValidator
     ){}
     public function validate(SimpleXMLElement $element): void
     {
+        $normalizedElement = $this->normalizeXmlElement($element);
         $itemReflection = new ReflectionClass(Item::class);
-        $properties = $itemReflection->getProperties(ReflectionProperty::IS_PUBLIC);
+        $properties = $itemReflection->getProperties(ReflectionProperty::IS_PRIVATE);
 
         foreach ($properties as $property) {
-            $name = $this->convertCamelCaseToSnakeCase($property->getName());
-            if (!isset($element->{$name})) {
+            $normalizedPropertyName = strtolower($property->getName());
+            if (!array_key_exists($normalizedPropertyName, $normalizedElement)) {
                 $this->logger->log(
                     LogLevel::ERROR,
-                    sprintf('Missing required property on the model item: %s', $name)
+                    sprintf('Missing required property on the model item: %s', $property->getName())
                 );
-                throw new InvalidArgumentException(sprintf('Missing required property on the model item: %s', $name),);
+                throw new InvalidArgumentException(
+                    sprintf('Missing required property on the model item: %s', $property->getName())
+                );
             }
-
         }
     }
 
-    private function convertCamelCaseToSnakeCase(string $input): string
+    private function convertSnakeCaseToCamelCase(string $input): string
     {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
+        return lcfirst(str_replace('_', '', ucwords($input, '_')));
+    }
+
+    /**
+     * @param SimpleXMLElement $element
+     * @return array<string, string>
+     */
+    private function normalizeXmlElement(SimpleXMLElement $element): array
+    {
+        $normalized = [];
+        foreach ($element as $key => $value) {
+            $normalizedKey = $this->convertSnakeCaseToCamelCase(strtolower($key));
+            $normalized[strtolower($normalizedKey)] = (string) $value;
+        }
+        return $normalized;
     }
 }

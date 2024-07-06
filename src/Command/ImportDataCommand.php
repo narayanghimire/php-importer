@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\config\ContainerConfig;
 use App\Service\DataImportService;
 use Exception;
+use Illuminate\Support\Env;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Symfony\Component\Console\Command\Command;
@@ -45,7 +45,6 @@ class ImportDataCommand extends Command
             $output->writeln('<error>Data import failed: ' . $e->getMessage() . '</error>');
             return Command::FAILURE;
         }
-
         return Command::SUCCESS;
     }
 }

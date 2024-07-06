@@ -12,7 +12,7 @@ class Item
         private readonly string  $sku,
         private readonly string  $name,
         private readonly ?string $description,
-        private readonly string  $shortDesc,
+        private readonly string  $shortdesc,
         private readonly float   $price,
         private readonly string  $link,
         private readonly string  $image,
@@ -24,7 +24,7 @@ class Item
         private readonly bool    $seasonal,
         private readonly bool    $inStock,
         private readonly int     $facebook,
-        private readonly bool $isKCup
+        private readonly bool     $isKCup
     ) {}
 
     public function getEntityId(): int
@@ -52,9 +52,9 @@ class Item
         return $this->description;
     }
 
-    public function getShortDesc(): string
+    public function getShortdesc(): string
     {
-        return $this->shortDesc;
+        return $this->shortdesc;
     }
 
     public function getPrice(): float

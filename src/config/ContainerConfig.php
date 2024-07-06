@@ -61,7 +61,11 @@ class ContainerConfig
         $this->container
             ->when(ImportDataCommand::class)
             ->needs('$fileName')
-            ->give(Env::get('XML_FILE_PATH'));
+            ->give(
+                Env::get('XML_FILE_PATH',
+                    getcwd(). Constants::DEFUALT_XML_FILE_PATH
+                )
+            );
 
         $this->container->singleton(LoggerInterface::class, function () {
             $monolog = new MonologLogger('application');
