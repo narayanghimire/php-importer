@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   php-importer:
     build:
@@ -9,10 +11,9 @@ services:
     volumes:
       - .:/var/www/html
     working_dir: /var/www/html
-    entrypoint: ["docker-php-entrypoint"]
-    command: ["php-fpm"]
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -36,8 +37,14 @@ services:
       - "3306:3306"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u ${MYSQL_USER} -p${MYSQL_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 volumes:
   mysql-data:
+
 networks:
   app-network:

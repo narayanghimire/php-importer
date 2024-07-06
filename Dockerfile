@@ -15,11 +15,18 @@ RUN apt-get update && \
         libssl-dev \
         libonig-dev \
         git \
+        wget \
+        netcat \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd pdo_mysql zip
 
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install Dockerize
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
+    && rm dockerize-linux-amd64-v0.6.1.tar.gz
 
 # Copy application files
 COPY . /var/www/html
@@ -30,5 +37,5 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
-# Default command for PHP-FPM
-CMD ["php-fpm"]
+# Default command for PHP-FPM, with Dockerize to wait for MySQL
+CMD ["dockerize", "-wait", "tcp://mysql:3306", "-timeout", "60s", "php-fpm"]
