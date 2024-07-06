@@ -54,6 +54,9 @@ jobs:
       - name: Check docker container
         run: |
           docker ps
+      - name: Check docker container
+        run: |
+          docker-compose logs mysql
 
       - name: Stop Docker containers
         run: |

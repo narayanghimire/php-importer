@@ -24,9 +24,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy application files
 COPY . /var/www/html
 
-# Install PHP dependencies
-RUN composer install --no-interaction --no-dev --optimize-autoloader
-
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
