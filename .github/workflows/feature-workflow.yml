@@ -37,10 +37,6 @@ jobs:
       - name: Composer install
         run: |
           docker-compose run php-importer composer install
-      - name: Wait for MySQL to be ready
-        run: |
-          ./wait-for-it.sh mysql 3306 -- echo "MySQL is up and running"         
-
       - name: Run Code check
         run: |
           docker-compose run php-importer composer codecheck
