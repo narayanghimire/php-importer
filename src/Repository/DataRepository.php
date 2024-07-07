@@ -27,6 +27,12 @@ class DataRepository implements DataRepositoryInterface
         $this->logger   = $logger;
     }
 
+    /**
+     * TODO: This method can be expanded further to create separate log files for each data import.
+     *       Using separate log files allows for easier comparison and troubleshooting in case of database issues.
+     *       This helps in maintaining data integrity and making it easier to identify and resolve any discrepancies.
+     */
+
     public function save(ItemCollection $itemCollection, OutputInterface $output): void
     {
         $pdo = $this->database->getPdo();

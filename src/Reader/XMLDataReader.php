@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Reader;
 
-use App\constants\Constants;
-use App\Logger\Logger;
 use App\Model\ItemCollection;
 use App\Transformer\XmlItemTransformer;
 use Exception;

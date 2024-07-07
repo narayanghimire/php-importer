@@ -6,6 +6,6 @@ namespace App\constants;
 
 class Constants
 {
-     const MYSQL_DATABASE_TYPE = "mysql";
-    const DEFUALT_XML_FILE_PATH = "/resources/feed.xml";
+     const string MYSQL_DATABASE_TYPE = "mysql";
+    const string DEFAULT_XML_FILE_PATH = "/resources/feed.xml";
 }

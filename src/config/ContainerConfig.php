@@ -63,12 +63,12 @@ class ContainerConfig
             ->needs('$fileName')
             ->give(
                 Env::get('XML_FILE_PATH',
-                    getcwd(). Constants::DEFUALT_XML_FILE_PATH
+                    getcwd(). Constants::DEFAULT_XML_FILE_PATH
                 )
             );
 
         $this->container->singleton(LoggerInterface::class, function () {
-            $monolog = new MonologLogger('application');
+            $monolog = new MonologLogger('php-importer');
             $monolog->pushHandler(new StreamHandler(__DIR__ . '/../../logs/error.log', MonologLogger::DEBUG));
             $monolog->pushProcessor(new FacilityProcessor());
             $monolog->pushProcessor(new ExceptionProcessor());
