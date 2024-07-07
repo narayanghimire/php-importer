@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\config\ContainerConfig;
+use App\Config\ContainerConfig;
 use Dotenv\Dotenv;
 use Illuminate\Container\Container;
 

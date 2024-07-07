@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\validator;
+namespace App\Validator;
 
 use App\Model\Item;
 use InvalidArgumentException;

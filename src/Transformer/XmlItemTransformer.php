@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Transformer;
 
 use App\Model\Item;
-use App\validator\XmlItemValidator;
+use App\Validator\XmlItemValidator;
 use SimpleXMLElement;
 
 readonly class XmlItemTransformer

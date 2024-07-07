@@ -8,7 +8,7 @@ use App\Logger\Logger;
 use App\Logger\Processor\FacilityProcessor;
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Application;
-use App\config\ContainerConfig;
+use App\Config\ContainerConfig;
 
 $containerConfig = new ContainerConfig(
         new Container()

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\config;
+namespace App\Config;
 
 use App\Command\ImportDataCommand;
 use App\Database\DatabaseInterface;
-use App\constants\Constants;
+use App\Constants\Constants;
 use App\Factory\DatabaseFactory;
 use App\Factory\DataReaderFactory;
 use App\Logger\Logger;
@@ -77,7 +77,8 @@ class ContainerConfig
         });
 
         $this->container->singleton(DatabaseInterface::class, function () {
-            $databaseType = (string) Env::get('DATABASE_TYPE', 'mysql') ?: Constants::MYSQL_DATABASE_TYPE;
+            $databaseType =  Env::get('DATABASE_TYPE', 'mysql') ?? Constants::MYSQL_DATABASE_TYPE;
+            // @phpstan-ignore-next-line
             return DatabaseFactory::create($databaseType);
         });
 

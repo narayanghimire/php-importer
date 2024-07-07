@@ -100,7 +100,7 @@ class XXXDatabase extends AbstractDatabase
     }
 }
 ```
-To use newly added database container config must be adjusted.
+To use newly added database container Config must be adjusted.
 ```
 $this->container->singleton(DatabaseInterface::class, function () {
             $databaseType = (string) Env::get('DATABASE_TYPE', 'xxx') ?: Constants::xxx_DATABASE_TYPE;

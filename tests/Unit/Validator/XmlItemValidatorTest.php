@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Validator;
 
-use App\validator\XmlItemValidator;
+use App\Validator\XmlItemValidator;
 use Tests\BaseTestCase;
 use InvalidArgumentException;
 use Prophecy\Prophecy\ObjectProphecy;
