@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\constants\Constants;
+use App\Constants\Constants;
 use App\Database\DatabaseInterface;
 use App\Database\MysqlDatabase;
 use Illuminate\Support\Env;

@@ -2,7 +2,7 @@
 
 namespace Tests\Integration;
 
-use App\config\ContainerConfig;
+use App\Config\ContainerConfig;
 use App\Repository\DataRepositoryInterface;
 use Illuminate\Container\Container;
 use Symfony\Component\Process\Process;

@@ -56,24 +56,19 @@ parameters:
 			path: src/Logger/Processor/FacilityProcessor.php
 
 		-
-			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: src/config/ContainerConfig.php
-
-		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
 			count: 1
-			path: src/config/ContainerConfig.php
+			path: src/Config/ContainerConfig.php
 
 		-
 			message: "#^Parameter \\#1 \\$implementation of method Illuminate\\\\Contracts\\\\Container\\\\ContextualBindingBuilder\\:\\:give\\(\\) expects array\\|Closure\\|string, mixed given\\.$#"
 			count: 1
-			path: src/config/ContainerConfig.php
+			path: src/Config/ContainerConfig.php
 
 		-
 			message: "#^Parameter \\#1 \\$sourceType of static method App\\\\Factory\\\\DataReaderFactory\\:\\:create\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
-			path: src/config/ContainerConfig.php
+			path: src/Config/ContainerConfig.php
 
 
 

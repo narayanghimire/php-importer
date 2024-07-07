@@ -6,7 +6,7 @@ namespace Tests\Unit\Transformer;
 
 use App\Model\Item;
 use App\Transformer\XmlItemTransformer;
-use App\validator\XmlItemValidator;
+use App\Validator\XmlItemValidator;
 use Tests\BaseTestCase;
 use InvalidArgumentException;
 use Prophecy\Prophecy\ObjectProphecy;
